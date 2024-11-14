@@ -3,8 +3,8 @@
 LiquidCrystal_I2C lcd(0x27, 20, 4);  // LCD address and size
 
 // LED and Button pin definitions
-const int ledPins[] = {2, 3, 4, 5, 6};     // Red, Blue, Green, Yellow, Orange LEDs
-const int buttonPins[] = {11, 10, 9, 8, 7}; // Buttons for the LEDs
+const int ledPins[] = {2, 3, 4, 5};     // Red, Blue, Green, Yellow, Orange LEDs
+const int buttonPins[] = {11, 10, 9, 8}; // Buttons for the LEDs
 
 const int buzzerPin = 13;
 
@@ -25,14 +25,14 @@ void setup() {
   lcd.backlight();   // Turn on backlight
   
   // Initialize LED pins as outputs
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     pinMode(ledPins[i], OUTPUT);
   }
   
   pinMode(buzzerPin, OUTPUT);  // Initialize buzzer
   
   // Initialize button pins as inputs
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     pinMode(buttonPins[i], INPUT);
   }
   
@@ -68,7 +68,7 @@ void loop() {
 
 void game() {
   if (!ledOn) {  // If no LED is on, randomly turn one on
-    currentLed = random(0, 5); // Choose a random LED index
+    currentLed = random(0, 4); // Choose a random LED index
     digitalWrite(ledPins[currentLed], HIGH);  // Turn on the selected LED
     ledOn = true;  // Set flag to indicate that an LED is on
   }
@@ -87,7 +87,7 @@ void game() {
 
 void GameOver() {
   // Turn on all LEDs and play buzzer sound
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     digitalWrite(ledPins[i], HIGH);
   }
   tone(buzzerPin, 1000);  // Play buzzer sound
@@ -100,7 +100,7 @@ void GameOver() {
   delay(1000);  // Wait for 1 second
 
   // Turn off all LEDs and buzzer
-  for (int i = 0; i < 5; i++) {
+  for (int i = 0; i < 4; i++) {
     digitalWrite(ledPins[i], LOW);
   }
   noTone(buzzerPin);
